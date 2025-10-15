@@ -20,6 +20,8 @@ public class AdvanceSalary {
     @JsonBackReference
     private Staff staff;
 
+    private Double remainingAmount;
+
     // Getters & Setters
 
     public Long getAdvanceId() { return advanceId; }
@@ -33,4 +35,12 @@ public class AdvanceSalary {
 
     public Staff getStaff() { return staff; }
     public void setStaff(Staff staff) { this.staff = staff; }
+
+    public Double getRemainingAmount() {
+        return remainingAmount;
+    }
+
+    public void setRemainingAmount(Double remainingAmount) {
+        this.remainingAmount = remainingAmount;
+    }
 }
