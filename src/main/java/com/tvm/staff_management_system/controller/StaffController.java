@@ -1,51 +1,50 @@
 package com.tvm.staff_management_system.controller;
 
+import com.tvm.staff_management_system.dto.StaffInfoDTO;
+import com.tvm.staff_management_system.dto.StaffModelDTO;
 import com.tvm.staff_management_system.model.Staff;
-import com.tvm.staff_management_system.repository.StaffRepository;
 import com.tvm.staff_management_system.service.StaffService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
-
 @RestController
-@RequestMapping("/staff")
+@RequestMapping("/api/staff")
 public class StaffController {
 
-@Autowired
-private StaffService staffService;
-    @PostMapping
-    public ResponseEntity<Staff> saveStaff(@RequestBody Staff staff){
-        Staff savestaff = staffService.save(staff);
+    @Autowired
+    private StaffService staffService;
 
-        return ResponseEntity.ok(savestaff);
+    @PostMapping
+    public ResponseEntity<Staff> saveStaff(@RequestBody StaffModelDTO staff ) {
+        return ResponseEntity.ok(staffService.save(staff));
     }
+
     @GetMapping
-    public List<Staff> getAllStaff(){
-        return staffService.getAllStaff();
+    public List<StaffInfoDTO> getAllStaff() {
+        return staffService.getAllStaff()
+                .stream()
+                .map(s -> new StaffInfoDTO(s.getId(), s.getName(), s.getRole(), s.getBaseSalary()))
+                .toList();
     }
 
     @GetMapping("/{id}")
-    public Staff getStaffById(@PathVariable Long id){
-        return  staffService.getStaffById(id);
+    public StaffInfoDTO getStaffById(@PathVariable Long id) {
+        Staff s = staffService.getStaffById(id);
+        return new StaffInfoDTO(s.getId(), s.getName(), s.getRole(), s.getBaseSalary());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateStaff(@PathVariable Long id, @RequestBody Staff staff) {
-        Staff updatedStaff = staffService.updateStaffById(id, staff);
-        return ResponseEntity.ok(" Staff with ID " + id + " updated successfully.");
+        staffService.updateStaffById(id, staff);
+        return ResponseEntity.ok("Staff with ID " + id + " updated successfully.");
     }
-
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteStaff(@PathVariable Long id){
-    staffService.deleteStaffById(id);
-    return ResponseEntity.ok("Staff Deleted");
-
+    public ResponseEntity<String> deleteStaff(@PathVariable Long id) {
+        staffService.deleteStaffById(id);
+        return ResponseEntity.ok("Staff deleted successfully.");
     }
-
-
 }
+
