@@ -116,21 +116,21 @@ public class SalaryPaymentService {
 
 
 
-    // Update salary manually
-    public SalaryPayment updateSalaryPayment(Long id, SalaryPayment newSalary) {
-        return salaryPaymentRepository.findById(id)
-                .map(existing -> {
-                    existing.setMonth(newSalary.getMonth());
-                    existing.setBaseSalary(newSalary.getBaseSalary());
-                    existing.setTotalAdvanceDeducted(newSalary.getTotalAdvanceDeducted());
-                    existing.setFinalSalary(newSalary.getFinalSalary());
-                    existing.setEarnedSalary(newSalary.getEarnedSalary());
-                    existing.setPaidDate(newSalary.getPaidDate());
-
-                    return salaryPaymentRepository.save(existing);
-                })
-                .orElseThrow(() -> new RuntimeException("SalaryPayment not found with ID: " + id));
-    }
+//    // Update salary manually
+//    public SalaryPayment updateSalaryPayment(Long id, SalaryPayment newSalary) {
+//        return salaryPaymentRepository.findById(id)
+//                .map(existing -> {
+//                    existing.setMonth(newSalary.getMonth());
+//                    existing.setBaseSalary(newSalary.getBaseSalary());
+//                    existing.setTotalAdvanceDeducted(newSalary.getTotalAdvanceDeducted());
+//                    existing.setFinalSalary(newSalary.getFinalSalary());
+//                    existing.setEarnedSalary(newSalary.getEarnedSalary());
+//                    existing.setPaidDate(newSalary.getPaidDate());
+//
+//                    return salaryPaymentRepository.save(existing);
+//                })
+//                .orElseThrow(() -> new RuntimeException("SalaryPayment not found with ID: " + id));
+//    }
 
     //Delete salary record
     public void deleteSalaryById(Long id) {

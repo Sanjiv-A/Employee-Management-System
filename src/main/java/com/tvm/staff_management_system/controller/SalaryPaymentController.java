@@ -65,15 +65,15 @@ public class SalaryPaymentController {
 
 
 
-    @PutMapping("/{salaryId}")
-    public ResponseEntity<SalaryPaymentDTO> updateSalary(
-            @PathVariable Long salaryId,
-            @RequestBody SalaryPayment updatedSalary
-    ) {
-        SalaryPayment salary = salaryPaymentService.updateSalaryPayment(salaryId, updatedSalary);
-        SalaryPaymentDTO dto = salaryPaymentService.toDTO(salary);
-        return ResponseEntity.ok(dto);
-    }
+//    @PutMapping("/{salaryId}")
+//    public ResponseEntity<SalaryPaymentDTO> updateSalary(
+//            @PathVariable Long salaryId,
+//            @RequestBody SalaryPayment updatedSalary
+//    ) {
+//        SalaryPayment salary = salaryPaymentService.updateSalaryPayment(salaryId, updatedSalary);
+//        SalaryPaymentDTO dto = salaryPaymentService.toDTO(salary);
+//        return ResponseEntity.ok(dto);
+//    }
 
 
     @DeleteMapping("/{salaryId}")

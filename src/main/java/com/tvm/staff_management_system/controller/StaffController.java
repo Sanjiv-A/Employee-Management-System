@@ -4,6 +4,7 @@ import com.tvm.staff_management_system.dto.StaffInfoDTO;
 import com.tvm.staff_management_system.dto.StaffModelDTO;
 import com.tvm.staff_management_system.model.Staff;
 import com.tvm.staff_management_system.service.StaffService;
+import io.swagger.v3.oas.annotations.Operation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ public class StaffController {
     @Autowired
     private StaffService staffService;
 
+    @Operation(summary = "Adding staffs " ,description ="Here we are adding the staffs in the data base "  )
     @PostMapping
     public ResponseEntity<Staff> saveStaff(@RequestBody StaffModelDTO staff ) {
         return ResponseEntity.ok(staffService.save(staff));
