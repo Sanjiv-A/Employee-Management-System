@@ -17,7 +17,7 @@ import java.util.List;
 public class AdvanceSalaryController {
 
     @Autowired
-    private AdvanceSalaryService advanceSalaryService;
+    private AdvanceSalaryService  advanceSalaryService;
 
 
 
