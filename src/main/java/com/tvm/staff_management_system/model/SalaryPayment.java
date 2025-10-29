@@ -12,12 +12,18 @@ public class SalaryPayment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long salaryId;
 
-    private String month;
-    private Double totalSalary;
-    private Double totalAdvance;
-    private Double finalSalary;
+    private String month;                // e.g., "2025-10"
+    private Double baseSalary;        // Full salary
+    private Integer totalWorkingDays;    // Total working days in month (excluding weekends)
+    private Double presentDays;          // Days employee was present
+    private Double earnedSalary;         // baseSalary * (presentDays / totalWorkingDays)
+    private Double totalAdvanceDeducted;
+    private Double finalSalary;          // earnedSalary - totalAdvanceDeducted
     private LocalDate paidDate;
-    private String pdfPath;
+
+
+
+
 
     @ManyToOne
     @JoinColumn(name = "staff_id")
@@ -26,27 +32,98 @@ public class SalaryPayment {
 
     // Getters & Setters
 
-    public Long getSalaryId() { return salaryId; }
-    public void setSalaryId(Long salaryId) { this.salaryId = salaryId; }
 
-    public String getMonth() { return month; }
-    public void setMonth(String month) { this.month = month; }
+    public Long getSalaryId() {
+        return salaryId;
+    }
 
-    public Double getTotalSalary() { return totalSalary; }
-    public void setTotalSalary(Double totalSalary) { this.totalSalary = totalSalary; }
+    public void setSalaryId(Long salaryId) {
+        this.salaryId = salaryId;
+    }
 
-    public Double getTotalAdvance() { return totalAdvance; }
-    public void setTotalAdvance(Double totalAdvance) { this.totalAdvance = totalAdvance; }
+    public String getMonth() {
+        return month;
+    }
 
-    public Double getFinalSalary() { return finalSalary; }
-    public void setFinalSalary(Double finalSalary) { this.finalSalary = finalSalary; }
+    public void setMonth(String month) {
+        this.month = month;
+    }
 
-    public LocalDate getPaidDate() { return paidDate; }
-    public void setPaidDate(LocalDate paidDate) { this.paidDate = paidDate; }
+    public Double getBaseSalary() {
+        return baseSalary;
+    }
 
-    public String getPdfPath() { return pdfPath; }
-    public void setPdfPath(String pdfPath) { this.pdfPath = pdfPath; }
+    public void setBaseSalary(Double baseSalary) {
+        this.baseSalary = baseSalary;
+    }
 
-    public Staff getStaff() { return staff; }
-    public void setStaff(Staff staff) { this.staff = staff; }
+    public Integer getTotalWorkingDays() {
+        return totalWorkingDays;
+    }
+
+    public void setTotalWorkingDays(Integer totalWorkingDays) {
+        this.totalWorkingDays = totalWorkingDays;
+    }
+
+    public Double getPresentDays() {
+        return presentDays;
+    }
+
+    public void setPresentDays(Double presentDays) {
+        this.presentDays = presentDays;
+    }
+
+    public Double getEarnedSalary() {
+        return earnedSalary;
+    }
+
+    public void setEarnedSalary(Double earnedSalary) {
+        this.earnedSalary = earnedSalary;
+    }
+
+    public Double getTotalAdvanceDeducted() {
+        return totalAdvanceDeducted;
+    }
+
+    public void setTotalAdvanceDeducted(Double totalAdvanceDeducted) {
+        this.totalAdvanceDeducted = totalAdvanceDeducted;
+    }
+
+    public Double getFinalSalary() {
+        return finalSalary;
+    }
+
+    public void setFinalSalary(Double finalSalary) {
+        this.finalSalary = finalSalary;
+    }
+
+    public LocalDate getPaidDate() {
+        return paidDate;
+    }
+
+    public void setPaidDate(LocalDate paidDate) {
+        this.paidDate = paidDate;
+    }
+
+
+
+    public Staff getStaff() {
+        return staff;
+    }
+
+    public void setStaff(Staff staff) {
+        this.staff = staff;
+    }
+
+
+
+    @Override
+    public String toString() {
+        return "SalaryPayment{" +
+                "staff=" + (staff != null ? staff.getName() : "N/A") +
+                ", month='" + month + '\'' +
+                ", finalSalary=" + finalSalary +
+                '}';
+    }
+
 }

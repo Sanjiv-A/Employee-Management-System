@@ -1,34 +1,20 @@
 package com.tvm.staff_management_system.dto;
 
-// StaffInfoDTO.java
+import java.time.LocalDate;
 
-public class StaffInfoDTO {
-    private Long staffId;
+public class StaffModelDTO {
     private String name;
     private String role;
     private Double baseSalary;
+    private LocalDate joinDate;
+    private String status;
 
-    public StaffInfoDTO(Long staffId, String name, String role, Double baseSalary) {
-        this.staffId = staffId;
+    public StaffModelDTO(String name, String role, Double baseSalary, LocalDate joinDate, String status) {
         this.name = name;
         this.role = role;
         this.baseSalary = baseSalary;
-    }
-    public StaffInfoDTO() {
-
-    }
-
-    public StaffInfoDTO(Long id, String name) {
-        this.staffId = id;
-        this.name = name; // assign name properly
-    }
-
-    public Long getStaffId() {
-        return staffId;
-    }
-
-    public void setStaffId(Long staffId) {
-        this.staffId = staffId;
+        this.joinDate = joinDate;
+        this.status = status;
     }
 
     public String getName() {
@@ -54,6 +40,20 @@ public class StaffInfoDTO {
     public void setBaseSalary(Double baseSalary) {
         this.baseSalary = baseSalary;
     }
+
+    public LocalDate getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(LocalDate joinDate) {
+        this.joinDate = joinDate;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 }
-
-

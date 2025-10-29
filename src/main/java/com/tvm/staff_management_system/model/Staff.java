@@ -10,42 +10,32 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
+@Getter
+@Setter
 public class Staff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String name;
     private String role;
-    private Double salary;
+    private Double baseSalary;
     private LocalDate joinDate;
     private String status;
-//
-//    @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @JsonIgnoreProperties("staff") // prevents infinite recursion in JSON
-//    private List<Attendance> attendances = new ArrayList<>();
-//
-//    @ManyToOne
-//    @JoinColumn(name = "staff_id")
-//    @JsonIgnoreProperties("attendances") // avoids recursion
-//    private Staff staff;
-
 
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<Attendance> attendanceList;
+    private List<Attendance> attendanceList = new ArrayList<>();
 
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<AdvanceSalary> advanceList;
+    private List<AdvanceSalary> advanceList = new ArrayList<>();
 
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
-    private List<SalaryPayment> salaryPaymentList;
-
-
+    private List<SalaryPayment> salaryPaymentList = new ArrayList<>();
 
     public Long getId() {
         return id;
@@ -71,12 +61,12 @@ public class Staff {
         this.role = role;
     }
 
-    public Double getSalary() {
-        return salary;
+    public Double getBaseSalary() {
+        return baseSalary;
     }
 
-    public void setSalary(Double salary) {
-        this.salary = salary;
+    public void setBaseSalary(Double baseSalary) {
+        this.baseSalary = baseSalary;
     }
 
     public LocalDate getJoinDate() {

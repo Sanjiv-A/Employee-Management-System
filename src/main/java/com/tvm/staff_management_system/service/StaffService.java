@@ -1,6 +1,7 @@
 package com.tvm.staff_management_system.service;
 
 
+import com.tvm.staff_management_system.dto.StaffModelDTO;
 import com.tvm.staff_management_system.model.Staff;
 import com.tvm.staff_management_system.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,8 +16,14 @@ public class StaffService {
     @Autowired
     private StaffRepository staffRepository;
 
-    public Staff save(Staff staff){
-        return  staffRepository.save(staff);
+    public Staff save(StaffModelDTO staff){
+        Staff data = new Staff();
+        data.setName(staff.getName());
+        data.setBaseSalary(staff.getBaseSalary());
+        data.setRole(staff.getRole());
+        data.setJoinDate(staff.getJoinDate());
+        data.setStatus(staff.getStatus());
+        return staffRepository.save(data);
     }
     public List<Staff> getAllStaff(){
         return staffRepository.findAll();
@@ -42,7 +49,7 @@ public class StaffService {
                 .map(existing -> {
                     existing.setName(staff.getName());
                     existing.setRole(staff.getRole());
-                    existing.setSalary(staff.getSalary());
+                    existing.setBaseSalary(staff.getBaseSalary());
                     existing.setJoinDate(staff.getJoinDate());
                     existing.setStatus(staff.getStatus());
                     return staffRepository.save(existing);
