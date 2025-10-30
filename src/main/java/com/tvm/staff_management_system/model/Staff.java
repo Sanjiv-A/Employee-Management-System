@@ -25,6 +25,7 @@ public class Staff {
     private LocalDate joinDate;
     private String status;
 
+    // Relationships
     @OneToMany(mappedBy = "staff", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Attendance> attendanceList = new ArrayList<>();
