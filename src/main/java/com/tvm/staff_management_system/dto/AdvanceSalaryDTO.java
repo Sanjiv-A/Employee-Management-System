@@ -1,7 +1,9 @@
 package com.tvm.staff_management_system.dto;
 
-import java.time.LocalDate;
+import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+@NoArgsConstructor
 public class AdvanceSalaryDTO {
     private Long id;
     private LocalDate date;

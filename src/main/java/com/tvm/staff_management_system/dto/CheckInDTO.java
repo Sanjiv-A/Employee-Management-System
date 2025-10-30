@@ -3,7 +3,9 @@ package com.tvm.staff_management_system.dto;
 
 
 import com.tvm.staff_management_system.model.AttendanceStatus;
+import lombok.NoArgsConstructor;
 
+@NoArgsConstructor
 public class CheckInDTO {
     private Long staffId;
     private AttendanceStatus status;

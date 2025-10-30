@@ -44,7 +44,7 @@ public class StaffService {
         else throw new RuntimeException("Staff Not Found With "+id + " to Delete");
 
     }
-    public Staff updateStaffById(Long id, Staff staff) {
+    public Staff updateStaffById(Long id, StaffModelDTO staff) {
         return staffRepository.findById(id)
                 .map(existing -> {
                     existing.setName(staff.getName());

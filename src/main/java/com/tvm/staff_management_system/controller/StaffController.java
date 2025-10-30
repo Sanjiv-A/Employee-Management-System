@@ -37,11 +37,16 @@ public class StaffController {
         return new StaffInfoDTO(s.getId(), s.getName(), s.getRole(), s.getBaseSalary());
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<String> updateStaff(@PathVariable Long id, @RequestBody Staff staff) {
+    @PutMapping(
+            value = "/{id}",
+            consumes = "application/json",
+            produces = "application/json"
+    )
+    public ResponseEntity<String> updateStaff(@PathVariable Long id, @RequestBody StaffModelDTO staff) {
         staffService.updateStaffById(id, staff);
         return ResponseEntity.ok("Staff with ID " + id + " updated successfully.");
     }
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteStaff(@PathVariable Long id) {
