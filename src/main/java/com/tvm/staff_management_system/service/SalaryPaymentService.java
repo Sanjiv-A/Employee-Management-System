@@ -2,10 +2,7 @@ package com.tvm.staff_management_system.service;
 
 import com.tvm.staff_management_system.dto.SalaryPaymentDTO;
 import com.tvm.staff_management_system.dto.StaffInfoDTO;
-import com.tvm.staff_management_system.model.Attendance;
-import com.tvm.staff_management_system.model.AttendanceStatus;
-import com.tvm.staff_management_system.model.SalaryPayment;
-import com.tvm.staff_management_system.model.Staff;
+import com.tvm.staff_management_system.model.*;
 import com.tvm.staff_management_system.repository.AdvanceSalaryRepository;
 import com.tvm.staff_management_system.repository.AttendanceRepository;
 import com.tvm.staff_management_system.repository.SalaryPaymentRepository;
@@ -67,36 +64,41 @@ public class SalaryPaymentService {
         // Count present days (excluding weekends)
         long presentDaysCount = attendanceList.stream()
                 .filter(a -> a.getStatus() == AttendanceStatus.PRESENT)
-                .filter(a -> !(a.getCheckInTime().getDayOfWeek() == DayOfWeek.SATURDAY
-                        || a.getCheckInTime().getDayOfWeek() == DayOfWeek.SUNDAY))
+                .filter(a -> !(a.getCheckInTime().getDayOfWeek() == DayOfWeek.SATURDAY ||
+                        a.getCheckInTime().getDayOfWeek() == DayOfWeek.SUNDAY))
                 .count();
+
         double presentDays = (double) presentDaysCount;
 
-        // Calculate total advance deducted for this month
+        // Fetch all advance amounts given to the staff in this month
         double totalAdvanceDeducted = advanceSalaryRepository.findByStaffIdOrderByDateAsc(staffId).stream()
                 .filter(a -> a.getDate().getMonthValue() == firstDay.getMonthValue() &&
                         a.getDate().getYear() == firstDay.getYear())
-                .mapToDouble(a -> a.getAmount()) // deduct actual advance amount
+                .mapToDouble(AdvanceSalary  ::getAmount)
                 .sum();
 
-        // Calculate earned salary based on staff's base salary
+        // Calculate earned salary for the days worked
         double earnedSalary = (staff.getBaseSalary() / totalWorkingDays) * presentDays;
+
+        // Deduct advance
         double finalSalary = earnedSalary - totalAdvanceDeducted;
+        if (finalSalary < 0) finalSalary = 0; // to avoid negative salary
 
         // Create salary record
         SalaryPayment salary = new SalaryPayment();
         salary.setStaff(staff);
         salary.setMonth(month);
-        salary.setBaseSalary(staff.getBaseSalary());    // use staff's base salary
+        salary.setBaseSalary(staff.getBaseSalary());
         salary.setTotalWorkingDays(totalWorkingDays);
-        salary.setPresentDays(presentDays);             // correctly set present days
+        salary.setPresentDays(presentDays);
         salary.setEarnedSalary(earnedSalary);
         salary.setTotalAdvanceDeducted(totalAdvanceDeducted);
         salary.setFinalSalary(finalSalary);
-        salary.setPaidDate(lastDay);                    // Salary paid at the end of month
+        salary.setPaidDate(lastDay);
 
         return salaryPaymentRepository.save(salary);
     }
+
 
 
     // Get salary by staff & month

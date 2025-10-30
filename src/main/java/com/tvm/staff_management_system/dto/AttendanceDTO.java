@@ -1,9 +1,10 @@
 package com.tvm.staff_management_system.dto;
 
 import com.tvm.staff_management_system.model.AttendanceStatus;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
-
+@NoArgsConstructor
 public class AttendanceDTO {
 
     private Long attendanceId;

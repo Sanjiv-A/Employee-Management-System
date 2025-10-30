@@ -1,5 +1,8 @@
 package com.tvm.staff_management_system.dto;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 
 public class AttendanceSummaryDTO {
     private StaffInfoDTO staff;

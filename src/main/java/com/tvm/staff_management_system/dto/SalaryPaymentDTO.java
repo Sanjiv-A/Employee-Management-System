@@ -1,7 +1,10 @@
 package com.tvm.staff_management_system.dto;
 
+import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
+@NoArgsConstructor
 public class SalaryPaymentDTO {
 
 

@@ -27,30 +27,31 @@ public class AdvanceSalaryService {
 
 
     public AdvanceSalary saveAdvanceSalary(AdvanceSalaryDTO advanceSalaryDTO) {
+        // Get staff details
+        Staff staff = staffRepository.findById(advanceSalaryDTO.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Invalid Staff ID: " + advanceSalaryDTO.getId()));
 
-        Long staffId = advanceSalaryDTO.getStaff().getStaffId();
-        Staff staff = staffRepository.findById(staffId)
-                .orElseThrow(() -> new RuntimeException("Staff not found"));
-
-        AdvanceSalary data = new AdvanceSalary();
-        data.setDate(advanceSalaryDTO.getDate());
-        data.setAmount(advanceSalaryDTO.getAmount());
-        data.setStaff(staff);
-
-        // Fetch latest record and calculate cumulative remaining
-        AdvanceSalary lastAdvance = advanceSalaryRepository.findLatestByStaffId(staffId);
-        double remainingAmount;
-
-        if (lastAdvance != null) {
-            remainingAmount = lastAdvance.getRemainingAmount() - advanceSalaryDTO.getAmount();
-        } else {
-            remainingAmount = staff.getBaseSalary() - advanceSalaryDTO.getAmount();
+        // Validation: Advance should not exceed base salary
+        if (advanceSalaryDTO.getAmount() > staff.getBaseSalary()) {
+            throw new IllegalArgumentException("Advance amount cannot exceed base salary.");
         }
 
-        data.setRemainingAmount(remainingAmount);
+        double remainingAmount = staff.getBaseSalary() - advanceSalaryDTO.getAmount();
 
-        return advanceSalaryRepository.save(data);
+
+
+        // Create AdvanceSalary entity
+        AdvanceSalary advanceSalary = new AdvanceSalary();
+        advanceSalary.setStaff(staff);
+        advanceSalary.setAmount(advanceSalaryDTO.getAmount());
+        advanceSalary.setDate(LocalDate.now());
+        advanceSalary.setRemainingAmount(remainingAmount);
+
+        // Save advance entry
+        return advanceSalaryRepository.save(advanceSalary);
     }
+
+
 
 
     public List<AdvanceSalaryDTO> getAllAdvanceSalary() {
@@ -101,24 +102,24 @@ public class AdvanceSalaryService {
 
 
     // Update Advance Salary
-    public AdvanceSalaryDTO updateAdvanceSalary(Long id, AdvanceSalary newAdvance) {
-        AdvanceSalary updated = advanceSalaryRepository.findById(id)
-                .map(existing -> {
-                    existing.setDate(newAdvance.getDate());
-                    existing.setAmount(newAdvance.getAmount());
-                    existing.setRemainingAmount(newAdvance.getRemainingAmount());
-                    return advanceSalaryRepository.save(existing);
-                })
-                .orElseThrow(() -> new RuntimeException("AdvanceSalary not found with ID: " + id));
-
-        return new AdvanceSalaryDTO(
-                updated.getId(),
-                updated.getDate(),
-                updated.getAmount(),
-                updated.getRemainingAmount(),
-                new StaffInfoDTO(updated.getStaff().getId(), updated.getStaff().getName())
-        );
-    }
+//    public AdvanceSalaryDTO updateAdvanceSalary(Long id, AdvanceSalary newAdvance) {
+//        AdvanceSalary updated = advanceSalaryRepository.findById(id)
+//                .map(existing -> {
+//                    existing.setDate(newAdvance.getDate());
+//                    existing.setAmount(newAdvance.getAmount());
+//                    existing.setRemainingAmount(newAdvance.getRemainingAmount());
+//                    return advanceSalaryRepository.save(existing);
+//                })
+//                .orElseThrow(() -> new RuntimeException("AdvanceSalary not found with ID: " + id));
+//
+//        return new AdvanceSalaryDTO(
+//                updated.getId(),
+//                updated.getDate(),
+//                updated.getAmount(),
+//                updated.getRemainingAmount(),
+//                new StaffInfoDTO(updated.getStaff().getId(), updated.getStaff().getName())
+//        );
+//    }
 
     // Delete Advance Salary
     public void deleteAdvanceSalaryById(Long id) {
