@@ -24,10 +24,8 @@ public class AdvanceSalaryController {
     @PostMapping(consumes = "application/json", produces = "application/json")
     public AdvanceSalaryDTO saveAdvanceSalary(@RequestBody AdvanceSalaryDTO advanceSalaryDTO) {
 
-        // 1️⃣ Save entity using service
         AdvanceSalary saved = advanceSalaryService.saveAdvanceSalary(advanceSalaryDTO);
 
-        // 2️⃣ Convert Staff entity to DTO
         StaffInfoDTO staffDTO = new StaffInfoDTO(
                 saved.getStaff().getId(),
                 saved.getStaff().getName(),
@@ -35,7 +33,6 @@ public class AdvanceSalaryController {
                 saved.getStaff().getBaseSalary()
         );
 
-        // 3️⃣ Build response DTO
         AdvanceSalaryDTO resultDTO = new AdvanceSalaryDTO(
                 saved.getId(),
                 saved.getDate(),
@@ -53,16 +50,7 @@ public class AdvanceSalaryController {
         return advanceSalaryService.getAllAdvanceSalary();
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<String> updateAdvanceSalary(@PathVariable Long id, @RequestBody AdvanceSalary advanceSalary){
-//        advanceSalaryService.updateAdvanceSalary(id, advanceSalary);
-//        return ResponseEntity.ok("AdvanceSalary with ID " + id + " updated successfully");
-//    }
-//    @GetMapping("/staff/{staffId}")
-//    public List<AdvanceSalaryDTO> getAdvancesByStaff(@PathVariable Long staffId) {
-//        return advanceSalaryService.getAdvancesByStaff(staffId);
-//    }
-//
+
 //
 //
     @GetMapping("/{id}")
