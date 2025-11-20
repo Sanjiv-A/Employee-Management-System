@@ -101,25 +101,25 @@ public class AdvanceSalaryService {
     }
 
 
-    // Update Advance Salary
-//    public AdvanceSalaryDTO updateAdvanceSalary(Long id, AdvanceSalary newAdvance) {
-//        AdvanceSalary updated = advanceSalaryRepository.findById(id)
-//                .map(existing -> {
-//                    existing.setDate(newAdvance.getDate());
-//                    existing.setAmount(newAdvance.getAmount());
-//                    existing.setRemainingAmount(newAdvance.getRemainingAmount());
-//                    return advanceSalaryRepository.save(existing);
-//                })
-//                .orElseThrow(() -> new RuntimeException("AdvanceSalary not found with ID: " + id));
-//
-//        return new AdvanceSalaryDTO(
-//                updated.getId(),
-//                updated.getDate(),
-//                updated.getAmount(),
-//                updated.getRemainingAmount(),
-//                new StaffInfoDTO(updated.getStaff().getId(), updated.getStaff().getName())
-//        );
-//    }
+
+    public AdvanceSalaryDTO updateAdvanceSalary(Long id, AdvanceSalary newAdvance) {
+        AdvanceSalary updated = advanceSalaryRepository.findById(id)
+                .map(existing -> {
+                    existing.setDate(newAdvance.getDate());
+                    existing.setAmount(newAdvance.getAmount());
+                    existing.setRemainingAmount(newAdvance.getRemainingAmount());
+                    return advanceSalaryRepository.save(existing);
+                })
+                .orElseThrow(() -> new RuntimeException("AdvanceSalary not found with ID: " + id));
+
+        return new AdvanceSalaryDTO(
+                updated.getId(),
+                updated.getDate(),
+                updated.getAmount(),
+                updated.getRemainingAmount(),
+                new StaffInfoDTO(updated.getStaff().getId(), updated.getStaff().getName())
+        );
+    }
 
     // Delete Advance Salary
     public void deleteAdvanceSalaryById(Long id) {
