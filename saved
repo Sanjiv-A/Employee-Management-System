@@ -1,0 +1,71 @@
+[33mcommit c9120294e7b9276863db6a381079dedab5f3af72[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Thu Oct 30 16:30:03 2025 +0530
+
+    added one line
+
+[33mcommit 46f17fb27a379d05521597ab3980987642dae5a8[m
+Merge: 7f34f89 1aafced
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Thu Oct 30 16:27:37 2025 +0530
+
+    Merge pull request #2 from Sanjiv-A/feature/subbranch
+    
+    Feature/subbranch
+
+[33mcommit 1aafced1ed71979a035d4b02a4ae4e12cb328f52[m[33m ([m[1;31morigin/feature/subbranch[m[33m, [m[1;32mfeature/subbranch[m[33m)[m
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Thu Oct 30 16:22:09 2025 +0530
+
+    new AdvanceDto  added
+
+[33mcommit ad3af595dddecddda22a9684103b0f86cfa0719e[m
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Thu Oct 30 16:20:55 2025 +0530
+
+    Added new Features
+
+[33mcommit 7f34f89351c1bf51b7b7eec7c13b63c9289e442f[m
+Merge: 88b1ce8 6a6790f
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Wed Oct 29 16:39:07 2025 +0530
+
+    Merge pull request #1 from Sanjiv-A/feature/subbranch
+    
+    Feature/subbranch
+
+[33mcommit 6a6790ff992b4f426234470b52f60f304998e84d[m
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Wed Oct 29 16:35:39 2025 +0530
+
+    Here I have added new implementation
+
+[33mcommit ad86c7697e08b9cbeb6ef9342e427fe95b271d31[m
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Wed Oct 29 10:43:45 2025 +0530
+
+    Here I have added new implementation
+
+[33mcommit d7c7520d6fe3e6ab8b0b9fb77bdd68382a3d6a8a[m
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Mon Oct 27 10:28:24 2025 +0530
+
+    Here I have added new implementation
+
+[33mcommit 7329efff1abdd72d5202db1795d9f323035ad4d1[m
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Wed Oct 22 11:14:03 2025 +0530
+
+    changes has done
+
+[33mcommit 2943c74ba61bc02f0087596f8ce2c5a4634b1ee2[m
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Wed Oct 15 10:17:40 2025 +0530
+
+    changes has done
+
+[33mcommit 88b1ce8e365ff97a291a92acf3b0dc91e466a736[m
+Author: Sanjiv-A <sanjivchiran@gmail.com>
+Date:   Tue Oct 14 10:21:49 2025 +0530
+
+    Initial commit - Staff Management System
